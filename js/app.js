@@ -9,7 +9,7 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-document.getElementById("RESET").addEventListener("click", alert("Hello World!"); ));
+$(".fa.fa-repeat").click = (function() { alert("hello world") }) ;
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
