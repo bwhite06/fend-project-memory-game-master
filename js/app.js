@@ -1,15 +1,32 @@
 /*
  * Create a list that holds all of your cards
  */
- var array = document.getElementsByClassName('fa fa-diamond fa fa-paper-plane-o fa fa-anchor fa-bolt fa fa-cube fa fa-leaf fa fa-bicycle fa fa-bomb');
- var arrClass = document.getElementsByTagName('li').classList;
+var array = $(".card").toArray();
+
+ function reset (){
+    $(".card").removeClass("match").removeClass("open").removeClass("show");
+ }
+ function diamond(){
+ var arr = $(".fa.fa-diamond").parents('.card').toArray()
+ $ (arr[0]).click(function(){$(arr[0]).addClass("open").addClass("show")});
+ 
+  }
+
+
+ $(".restart").click(function(){reset()});
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-$(".fa.fa-repeat").click = (function() { alert("hello world") }) ;
+
+
+
+
+
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
