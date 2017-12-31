@@ -2,14 +2,31 @@
  * Create a list that holds all of your cards
  */
 var array = $(".card").toArray();
+var moves = document.getElementById("numberMoves").innerText = 0;
 
  function reset (){
     $(".card").removeClass("match").removeClass("open").removeClass("show");
+
  }
+
  function diamond(){
  var arr = $(".fa.fa-diamond").parents('.card').toArray()
- $ (arr[0]).click(function(){$(arr[0]).addClass("open").addClass("show")});
- 
+
+ $ (arr[0]).click(function(){$(arr[0]).addClass("open").addClass("show")
+var moves = document.getElementById("numberMoves").innerText++;
+});
+
+ $ (arr[1]).click(function(){$(arr[1]).addClass("open").addClass("show")
+var moves = document.getElementById("numberMoves").innerText++;
+});
+
+if ($(arr[1]).hasClass("open") && $(arr[1]).hasClass("open")){
+  $(".fa.fa-diamond").parents('.card').addClass("match");
+}
+else {
+  return reset();
+}
+
   }
 
 
