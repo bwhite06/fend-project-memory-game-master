@@ -20,16 +20,35 @@ var moves = document.getElementById("numberMoves").innerText++;
 var moves = document.getElementById("numberMoves").innerText++;
 });
 
-if ($(arr[1]).hasClass("open") && $(arr[1]).hasClass("open")){
+if ($(arr[1]).hasClass("open") && $(arr[0]).hasClass("open")){
   $(".fa.fa-diamond").parents('.card').addClass("match");
 }
-else {
+else if (!$(".fa.fa-diamond").parents('.card').hasClass("open")){
   return reset();
 }
+}
 
+function bolt(){
+var arr1 = $(".fa.fa-bolt").parents('.card').toArray()
+
+$ (arr1[0]).click(function(){$(arr1[0]).addClass("open").addClass("show")
+var moves = document.getElementById("numberMoves").innerText++;
+});
+
+(arr1[1]).click(function(){$(arr1[1]).addClass("open").addClass("show")
+var moves = document.getElementById("numberMoves").innerText++;
+});
+
+if ($(arr1[1]).hasClass("open") && $(arr1[0]).hasClass("open")){
+ $("..fa.fa-bolt").parents('.card').addClass("match");
+}
+else if (!$(".fa.fa-bolt").parents('.card').hasClass("open")){
+ return reset();
+}
   }
 
-
+diamond();
+bolt();
  $(".restart").click(function(){reset()});
 
 /*
