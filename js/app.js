@@ -12,45 +12,84 @@ var moves = document.getElementById("numberMoves").innerText = 0;
  function diamond(){
  var arr = $(".fa.fa-diamond").parents('.card').toArray()
 
- $ (arr[0]).click(function(){$(arr[0]).addClass("open").addClass("show")
-var moves = document.getElementById("numberMoves").innerText++;
-});
+ $(arr[0]).click(function(){$(arr[0]).addClass("open").addClass("show");
 
- $ (arr[1]).click(function(){$(arr[1]).addClass("open").addClass("show")
 var moves = document.getElementById("numberMoves").innerText++;
-});
 
 if ($(arr[1]).hasClass("open") && $(arr[0]).hasClass("open")){
   $(".fa.fa-diamond").parents('.card').addClass("match");
 }
-else if (!$(".fa.fa-diamond").parents('.card').hasClass("open")){
-  return reset();
+
+
+
+});
+
+ $(arr[1]).click(function(){$(arr[1]).addClass("open").addClass("show")
+var moves = document.getElementById("numberMoves").innerText++;
+if ($(arr[1]).hasClass("open") && $(arr[0]).hasClass("open")){
+  $(".fa.fa-diamond").parents('.card').addClass("match");
 }
+
+});
+
 }
 
 function bolt(){
-var arr1 = $(".fa.fa-bolt").parents('.card').toArray()
+var arr = $(".fa.fa-bolt").parents('.card').toArray();
 
-$ (arr1[0]).click(function(){$(arr1[0]).addClass("open").addClass("show")
+$ (arr[0]).click(function(){$(arr[0]).addClass("open").addClass("show");
+
 var moves = document.getElementById("numberMoves").innerText++;
+
+if ($(arr[1]).hasClass("open") && $(arr[0]).hasClass("open")){
+ $(".fa.fa-bolt").parents('.card').addClass("match");
+}
+
+
+
 });
 
-(arr1[1]).click(function(){$(arr1[1]).addClass("open").addClass("show")
+if (!$(".fa.fa-bolt").parents('.card').hasClass("match")) {
+$(".card").removeClass("open").removeClass("show");
+};
+
+$ (arr[1]).click(function(){$(arr[1]).addClass("open").addClass("show");
+
 var moves = document.getElementById("numberMoves").innerText++;
+
+
 });
+if (!$(".fa.fa-bolt").parents('.card').hasClass("match")) {
+$(".card").removeClass("open").removeClass("show");
+};
+if (!$(".fa.fa-bolt").parents('.card').hasClass("match")) {
+$(".card").removeClass("open").removeClass("show");
+};
 
-if ($(arr1[1]).hasClass("open") && $(arr1[0]).hasClass("open")){
- $("..fa.fa-bolt").parents('.card').addClass("match");
 }
-else if (!$(".fa.fa-bolt").parents('.card').hasClass("open")){
- return reset();
-}
-  }
 
-diamond();
+
+function flip(){
+if (!$(".fa.fa-bolt").parents('.card').hasClass("match")) {
+$(".card").removeClass("open").removeClass("show");
+};
+
+if (!$(".fa.fa-diamond").parents('.card').hasClass("match")) {
+$(".card").removeClass("open").removeClass("show");
+};
+};
+
+function start(){
+
 bolt();
- $(".restart").click(function(){reset()});
+diamond();
 
+}
+start();
+start();
+$('.card').click(function(){flip()});
+ $(".restart").click(function(){reset()});
+start();
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
