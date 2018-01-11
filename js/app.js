@@ -5,11 +5,8 @@ var listCards = ["fa fa-diamond","fa fa-paper-plane-o", "fa fa-anchor", "fa fa-b
 
 var moves = document.getElementById("numberMoves").innerText = 0;
 var holder = $(".fa.fa-star");
-window.onload = function() {
-    listCards = shuffle(listCards);
-    shuffle_cards(listCards);
 
-  }
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
 
@@ -40,11 +37,11 @@ function shuffle_cards(array)
 
 
 
- var card1, card2;
- var openList = [];
- var matchList = [];
+ let card1, card2;
+ let openList = [];
+ let matchList = [];
 
-
+//finds a match
  function ismatch()
 {
     let class1 = $(openList[0]).children('i').attr('class');
@@ -67,16 +64,13 @@ function shuffle_cards(array)
     openList.length = 0;
     return;
 }
-
+//counts performance
 function moves1(){
   if (document.getElementById("numberMoves").innerText ==16){
       $(holder[2]).removeClass("fa fa-star") ;
   }
   else if (document.getElementById("numberMoves").innerText ==32) {
     $(holder[1]).removeClass("fa fa-star");
-  }
-  else if (document.getElementById("numberMoves").innerText==364) {
-    $(holder[0]).removeClass("fa fa-star");
   }
 
 
@@ -87,7 +81,7 @@ function moves1(){
 $(document).ready(function() {
 
 
-
+//main
 
 
 $(".restart").click(function() {
@@ -109,9 +103,9 @@ moves1();
         }
 
         var arr = $(".match").toArray();
-        if (arr.length === 16){alert("You Win")}
+        if (arr.length === 16){alert("You Win in " + document.getElementById("numberMoves").innerText + " moves. with a star rating of " + $(".fa.fa-star").length)}
             console.log(matchList);
-            var moves = document.getElementById("numberMoves").innerText++;
+        var moves = document.getElementById("numberMoves").innerText++;
 
 
     });
@@ -121,38 +115,64 @@ moves1();
 });
 
 
+
+
+
+
+
+
+
 function reset (){
+
    $(".card").removeClass("match").removeClass("open").removeClass("show");
 var moves = document.getElementById("numberMoves").innerText = 0;
 console.log("reset");
 $(holder).addClass("fa fa-star");
+listCards = shuffle(listCards);
+shuffle_cards(listCards);
+
 }
 
 
+//https://stackoverflow.com/questions/20618355/the-simplest-possible-javascript-countdown-timer
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+
+            alert("Try again");
+
+            timer=duration;
+        }
+
+    }, 1000);
+}
+//onload
+window.onload = function () {
+  listCards = shuffle(listCards);
+  shuffle_cards(listCards);
+    var threeMinutes = 60 * 3;
+        display = document.querySelector('#time');
+    startTimer(threeMinutes, display);;
+    reset();
+};
 
 
 
+$(".restart").click(function() {
+  listCards = shuffle(listCards);
+  shuffle_cards(listCards);
+    var threeMinutes = 60 * 3;
+        display = document.querySelector('#time');
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
-
-
-
-
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+    startTimer(threeMinutes, display);
+    reset();
+});

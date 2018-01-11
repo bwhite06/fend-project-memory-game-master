@@ -1,20 +1,13 @@
-# Memory Game Project
+# Memory Game
 
-## Table of Contents
-
-* [Instructions](#instructions)
-* [Contributing](#contributing)
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+The game is played by matching 16 cards in a deck with with 8 matches.
+When using the console the matches are shown.
 
-To get started, open `js/app.js` and start building out the app's functionality
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+What the player is to expect from the game?
+As the timer goes down; the user clicks cars to make matches.
+Your amount of moves determine your star rating.
+stackoverflow was used as a resource to develop the game
