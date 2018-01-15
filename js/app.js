@@ -92,25 +92,36 @@ $(holder).addClass("fa fa-star");
 $("ul.deck li").click(function() {
 
 moves1();
-
+        document.getElementById("numberMoves").innerText++;
         openList.push(this);
         $(this).addClass("show open");
         console.log(openList);
 
         if(openList.length === 2)
         {
-            setTimeout(ismatch,1000);
+            setTimeout(ismatch,500);
         }
+if ($(".match").length===1){
 
+  $(".card").removeClass("match").removeClass("open").removeClass("show");
+  var moves = document.getElementById("numberMoves").innerText = 0;
+  console.log("reset");
+  $(holder).addClass("fa fa-star");
+  listCards = shuffle(listCards);
+  shuffle_cards(listCards);
+  clearInterval(timer);
+  totalSeconds = 0;
+  timer = setInterval(setTime, 1000);
+  alert("clicked same sqaure too many times");
+
+}
         var arr = $(".match").toArray();
-        if (arr.length === 16){alert("You Win in " + document.getElementById("numberMoves").innerText + " moves. with a star rating of " + $(".fa.fa-star").length)}
-            console.log(matchList);
-        var moves = document.getElementById("numberMoves").innerText++;
+        if (arr.length === 16){alert("You Win in " + document.getElementById("numberMoves").innerText + " moves. With a star rating of " + $(".fa.fa-star").length + " in " + minutesLabel.innerHTML + " minutes and "+ secondsLabel.innerHTML + " seconds")}
 
 
     });
 
-
+reset();
 
 });
 
@@ -130,38 +141,37 @@ console.log("reset");
 $(holder).addClass("fa fa-star");
 listCards = shuffle(listCards);
 shuffle_cards(listCards);
-
+clearInterval(timer);
+totalSeconds = 0;
+timer = setInterval(setTime, 1000);
 }
 
 
-//https://stackoverflow.com/questions/20618355/the-simplest-possible-javascript-countdown-timer
-function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
-    setInterval(function () {
-        minutes = parseInt(timer / 60, 10)
-        seconds = parseInt(timer % 60, 10);
+//https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
+var minutesLabel = document.getElementById("minutes");
+var secondsLabel = document.getElementById("seconds");
+var totalSeconds = 0;
+let timer = setInterval(setTime, 1000);
 
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
+function setTime() {
+  ++totalSeconds;
+  secondsLabel.innerHTML = pad(totalSeconds % 60);
+  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+}
 
-        display.textContent = minutes + ":" + seconds;
-
-        if (--timer < 0) {
-
-            alert("Try again");
-
-            timer=duration;
-        }
-
-    }, 1000);
+function pad(val) {
+  var valString = val + "";
+  if (valString.length < 2) {
+    return "0" + valString;
+  } else {
+    return valString;
+  }
 }
 //onload
 window.onload = function () {
   listCards = shuffle(listCards);
   shuffle_cards(listCards);
-    var threeMinutes = 60 * 3;
-        display = document.querySelector('#time');
-    startTimer(threeMinutes, display);;
+
     reset();
 };
 
@@ -170,9 +180,8 @@ window.onload = function () {
 $(".restart").click(function() {
   listCards = shuffle(listCards);
   shuffle_cards(listCards);
-    var threeMinutes = 60 * 3;
-        display = document.querySelector('#time');
 
-    startTimer(threeMinutes, display);
+
+
     reset();
 });
