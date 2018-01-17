@@ -37,6 +37,7 @@ function shuffle_cards(array)
 
 
 
+
  let card1, card2;
  let openList = [];
  let matchList = [];
@@ -80,14 +81,22 @@ function moves1(){
 
 $(document).ready(function() {
 
-
 //main
-
+var arr = $(".match").toArray();
+if (arr.length === 16){
+  alert("You Win in " + document.getElementById("numberMoves").innerText + " moves. With a star rating of " + $(".fa.fa-star").length + " in " + minutesLabel.innerHTML + " minutes and "+ secondsLabel.innerHTML + " seconds")}
 
 $(".restart").click(function() {
 reset();
 $(holder).addClass("fa fa-star");
 });
+
+$("#start").click(function() {
+    totalSeconds = 0;
+  clearInterval(timer);
+    timer = setInterval(setTime, 1000);
+
+    });
 
 $("ul.deck li").click(function() {
 
@@ -99,6 +108,7 @@ moves1();
 
         if(openList.length === 2)
         {
+
             setTimeout(ismatch,500);
         }
 if ($(".match").length===1){
@@ -142,8 +152,7 @@ $(holder).addClass("fa fa-star");
 listCards = shuffle(listCards);
 shuffle_cards(listCards);
 clearInterval(timer);
-totalSeconds = 0;
-timer = setInterval(setTime, 1000);
+
 }
 
 
@@ -171,7 +180,7 @@ function pad(val) {
 window.onload = function () {
   listCards = shuffle(listCards);
   shuffle_cards(listCards);
-
+clearInterval(timer);
     reset();
 };
 
