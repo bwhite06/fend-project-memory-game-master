@@ -49,7 +49,7 @@ function shuffle_cards(array)
     let class2 = $(openList[1]).children('i').attr('class');
     console.log("class1:",class1);
     console.log("class2:",class2);
-    if(class1 === class2 && openList>1)
+    if(class1 === class2)
     {
         console.log("match card");
         $(openList[0]).addClass("match");
