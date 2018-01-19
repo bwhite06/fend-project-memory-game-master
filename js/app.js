@@ -7,6 +7,8 @@ var moves = document.getElementById("numberMoves").innerText = 0;
 var holder = $(".fa.fa-star");
 
 
+
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
 
@@ -41,12 +43,14 @@ function shuffle_cards(array)
  let card1, card2;
  let openList = [];
  let matchList = [];
+ let clicked=false;
 
 //finds a match
  function ismatch()
 {
     let class1 = $(openList[0]).children('i').attr('class');
     let class2 = $(openList[1]).children('i').attr('class');
+
     console.log("class1:",class1);
     console.log("class2:",class2);
     if(class1 === class2)
@@ -57,6 +61,7 @@ function shuffle_cards(array)
         matchList.push(openList[0]);
         matchList.push(openList[1]);
     }
+
     else {
         console.log("mismatch card");
         $(openList[0]).removeClass("open show");
@@ -64,6 +69,7 @@ function shuffle_cards(array)
     }
     openList.length = 0;
     return;
+
 }
 //counts performance
 function moves1(){
@@ -91,14 +97,19 @@ reset();
 $(holder).addClass("fa fa-star");
 });
 
-$("#start").click(function() {
-    totalSeconds = 0;
-  clearInterval(timer);
-    timer = setInterval(setTime, 1000);
 
+clicked = false
+$( "ul.deck li" ).one( "click", function() {
+  if (!clicked){
+    timer()
+
+}
+clicked = true;
     });
-
 $("ul.deck li").click(function() {
+clicked=true;
+
+
 
 moves1();
         document.getElementById("numberMoves").innerText++;
@@ -108,35 +119,44 @@ moves1();
 
         if(openList.length === 2)
         {
+          setTimeout(ismatch,500);
+          setTimeout(flip,600);
 
-            setTimeout(ismatch,500);
         }
-if ($(".match").length===1){
+      function flip(){
+              if (!$('.show').length%2===0 && clicked) {
+                  $('.show').addClass("flip");
+                  $('.flip').removeClass('open').removeClass('show').removeClass('match');
+                  $('.flip').removeClass('flip');
+                  $('.flip').removeClass('flip')
+                }
 
-  $(".card").removeClass("match").removeClass("open").removeClass("show");
-  var moves = document.getElementById("numberMoves").innerText = 0;
-  console.log("reset");
-  $(holder).addClass("fa fa-star");
-  listCards = shuffle(listCards);
-  shuffle_cards(listCards);
-  clearInterval(timer);
-  totalSeconds = 0;
-  timer = setInterval(setTime, 1000);
-  alert("clicked same sqaure too many times");
+          }
 
-}
+
+    });
         var arr = $(".match").toArray();
         if (arr.length === 16){alert("You Win in " + document.getElementById("numberMoves").innerText + " moves. With a star rating of " + $(".fa.fa-star").length + " in " + minutesLabel.innerHTML + " minutes and "+ secondsLabel.innerHTML + " seconds")}
 
 
     });
 
-reset();
-
-});
 
 
 
+    function timer(){var sec = 0;
+       function pad ( val ) { return val > 9 ? val : "0" + val; }
+       let timer = setInterval( function(){
+           document.getElementById("seconds").innerHTML=pad(++sec%60);
+           document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
+       }, 1000);
+       $(".restart").click(function() {
+
+        clearInterval(timer);
+
+       });
+
+     }
 
 
 
@@ -152,45 +172,29 @@ $(holder).addClass("fa fa-star");
 listCards = shuffle(listCards);
 shuffle_cards(listCards);
 clearInterval(timer);
+document.getElementById("minutes").innerHTML='00'
+document.getElementById("seconds").innerHTML='00'
+
 
 }
 
 
-//https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
-var minutesLabel = document.getElementById("minutes");
-var secondsLabel = document.getElementById("seconds");
-var totalSeconds = 0;
-let timer = setInterval(setTime, 1000);
 
-function setTime() {
-  ++totalSeconds;
-  secondsLabel.innerHTML = pad(totalSeconds % 60);
-  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
-}
 
-function pad(val) {
-  var valString = val + "";
-  if (valString.length < 2) {
-    return "0" + valString;
-  } else {
-    return valString;
-  }
-}
+
+
+
 //onload
 window.onload = function () {
   listCards = shuffle(listCards);
   shuffle_cards(listCards);
-clearInterval(timer);
-    reset();
+  $(".card").removeClass("match").removeClass("open").removeClass("show");
+
 };
 
 
 
 $(".restart").click(function() {
-  listCards = shuffle(listCards);
-  shuffle_cards(listCards);
-
-
-
+timer();
     reset();
 });
