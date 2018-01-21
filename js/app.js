@@ -57,7 +57,9 @@ function shuffle_cards(array)
     {
         console.log("match card");
         $(openList[0]).addClass("match");
-        $(openList[1]).addClass("match");
+        $(openList[1]).addClass("match")
+        $(openList[0]).removeClass("open show");
+        $(openList[1]).removeClass("open show");
         matchList.push(openList[0]);
         matchList.push(openList[1]);
     }
@@ -98,40 +100,38 @@ $(holder).addClass("fa fa-star");
 });
 
 
-clicked = false
+$("li").click(function() {
+if (!$('.show').length%2===0||!$('.show').length===0 && clicked)
+{
+flip();
+}
+});
+
+check=false
+let clicked = false
 $( "ul.deck li" ).one( "click", function() {
   if (!clicked){
     timer()
 
 }
-clicked = true;
+
     });
 $("ul.deck li").click(function() {
 clicked=true;
-
-
-
-moves1();
         document.getElementById("numberMoves").innerText++;
         openList.push(this);
         $(this).addClass("show open");
         console.log(openList);
-
         if(openList.length === 2)
         {
-          setTimeout(ismatch,500);
-          setTimeout(flip,600);
+
+          setTimeout(ismatch,502);
+
 
         }
-      function flip(){
-              if (!$('.show').length%2===0 && clicked) {
-                  $('.show').addClass("flip");
-                  $('.flip').removeClass('open').removeClass('show').removeClass('match');
-                  $('.flip').removeClass('flip');
-                  $('.flip').removeClass('flip')
-                }
 
-          }
+
+
 
 
     });
@@ -174,13 +174,9 @@ shuffle_cards(listCards);
 clearInterval(timer);
 document.getElementById("minutes").innerHTML='00'
 document.getElementById("seconds").innerHTML='00'
-
+clicked = false
 
 }
-
-
-
-
 
 
 
@@ -192,9 +188,14 @@ window.onload = function () {
 
 };
 
-
+//on restart
 
 $(".restart").click(function() {
 timer();
     reset();
 });
+
+function flip() {
+  $(openList).removeClass('open').removeClass('show').removeClass('match');
+}
+clicked = false
