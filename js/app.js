@@ -53,6 +53,7 @@ function shuffle_cards(array)
 
     console.log("class1:",class1);
     console.log("class2:",class2);
+
     if(class1 === class2)
     {
         console.log("match card");
@@ -100,12 +101,7 @@ $(holder).addClass("fa fa-star");
 });
 
 
-$("li").click(function() {
-if (!$('.show').length%2===0||!$('.show').length===0 && clicked)
-{
-flip();
-}
-});
+
 
 check=false
 let clicked = false
@@ -117,6 +113,14 @@ $( "ul.deck li" ).one( "click", function() {
 
     });
 $("ul.deck li").click(function() {
+
+  $("ul.deck li").click(function() {
+  if (!$('.match').length%2===0||!$('.match').length===0 )
+  {
+
+    setTimeout(flip,400);
+  }
+  });
 clicked=true;
         document.getElementById("numberMoves").innerText++;
         openList.push(this);
@@ -196,6 +200,7 @@ timer();
 });
 
 function flip() {
-  $(openList).removeClass('open').removeClass('show').removeClass('match');
+  $('.card').removeClass('open').removeClass('show').removeClass('match');
+  alert ('clicked same card twice');
 }
 clicked = false
