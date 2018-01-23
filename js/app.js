@@ -206,8 +206,9 @@ function flip() {
 }
 function win(){
   if (matchList.length === 16){
-     alert("You Win in " + document.getElementById("numberMoves").innerText + " moves. With a star rating of " + $(".fa.fa-star").length + " in " + document.getElementById("minutes").innerText + " minutes and "+  document.getElementById("seconds").innerText + " seconds")
-     reset();
+    clearInterval(timer);
+    alert("You Win in " + document.getElementById("numberMoves").innerText + " moves. With a star rating of " + $(".fa.fa-star").length + " in " + document.getElementById("minutes").innerText + " minutes and "+  document.getElementById("seconds").innerText + " seconds")
+    reset();
 
    ;}
 }
