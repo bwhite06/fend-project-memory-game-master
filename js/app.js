@@ -154,7 +154,11 @@ clicked=true;
 
          }
        }, 1000);
-       
+       $(".restart").click(function() {
+           clearInterval(timer);
+
+
+       });
 
      }
 
@@ -191,9 +195,10 @@ window.onload = function () {
 //on restart
 
 $(".restart").click(function() {
-  clearInterval(timer);
-timer();
-    reset();
+  reset();
+  timer();
+
+
 });
 
 function flip() {
