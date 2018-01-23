@@ -5,10 +5,11 @@ var listCards = ["fa fa-diamond","fa fa-paper-plane-o", "fa fa-anchor", "fa fa-b
 
 var moves = document.getElementById("numberMoves").innerText = 0;
 var holder = $(".fa.fa-star");
-
-
-
-
+let card1, card2;
+let openList = [];
+let matchList = [];
+let clicked=false;
+var countDown;
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
 
@@ -32,34 +33,15 @@ function shuffle_cards(array)
         {
             var curr = list[i];
             curr = curr.getElementsByTagName("i")[0].setAttribute("class", array[i]);
-            console.log(curr);
         }
 }
-
-
-
-
-
- let card1, card2;
- let openList = [];
- let matchList = [];
- let clicked=false;
-
-
-
-
- //finds a match
+//finds a match
  function ismatch()
 {
     let class1 = $(openList[0]).children('i').attr('class');
     let class2 = $(openList[1]).children('i').attr('class');
-
-    console.log("class1:",class1);
-    console.log("class2:",class2);
-
     if(class1 === class2)
     {
-        console.log("match card");
         $(openList[0]).addClass("match");
         $(openList[1]).addClass("match")
         $(openList[0]).removeClass("open show");
@@ -69,7 +51,6 @@ function shuffle_cards(array)
     }
 
     else {
-        console.log("mismatch card");
         $(openList[0]).removeClass("open show");
         $(openList[1]).removeClass("open show");
     }
@@ -90,120 +71,24 @@ function moves1(){
 }
 
 
-
-
-
-$(document).ready(function() {
-
-//main
-
-$(".restart").click(function() {
-reset();
-$(holder).addClass("fa fa-star");
-});
-
-
-
-
-check=false
-let clicked = false
-$( "ul.deck li" ).one( "click", function() {
-  if (!clicked){
-    timer()
-
-}
-
-    });
-$("ul.deck li").click(function() {
-moves1();
-
-clicked=true;
-        document.getElementById("numberMoves").innerText++;
-        openList.push(this);
-        $(this).addClass("show open");
-        console.log(openList);
-        if(openList.length === 2)
-        {
-
-          setTimeout(ismatch,502);
-          setTimeout(win,700);
-
-        }
-
-
-
-
-
-    });
-
-
-
-
-    });
-
-
-
-
-    function timer(){var sec = 0;
-       function pad ( val ) { return val > 9 ? val : "0" + val; }
-       let timer = setInterval( function(){
-           document.getElementById("seconds").innerHTML=pad(++sec%60);
-           document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
-           if (matchList.length === 16){
-               clearInterval(timer);
-         }
-       }, 1000);
-       $(".restart").click(function() {
-           clearInterval(timer);
-
-
-       });
-
-     }
-
-
-
-
-
-
 function reset (){
-
-   $(".card").removeClass("match").removeClass("open").removeClass("show");
-var moves = document.getElementById("numberMoves").innerText = 0;
-console.log("reset");
-$(holder).addClass("fa fa-star");
-listCards = shuffle(listCards);
-shuffle_cards(listCards);
-matchList = [];
-document.getElementById("minutes").innerHTML='00'
-document.getElementById("seconds").innerHTML='00'
-clicked = false
-clearInterval(timer);
+    $(".card").removeClass("match").removeClass("open").removeClass("show");
+    var moves = document.getElementById("numberMoves").innerText = 0;
+    $(holder).addClass("fa fa-star");
+    listCards = shuffle(listCards);
+    shuffle_cards(listCards);
+    matchList = [];
+    document.getElementById("minutes").innerHTML='00';
+    document.getElementById("seconds").innerHTML='00';
+    clicked = false;
+    clearInterval(countDown);
 }
-
-
-
-//onload
-window.onload = function () {
-  listCards = shuffle(listCards);
-  shuffle_cards(listCards);
-  $(".card").removeClass("match").removeClass("open").removeClass("show");
-
-};
-
-//on restart
-
-$(".restart").click(function() {
-  reset();
-  timer();
-
-
-});
 
 function flip() {
   $('.card').removeClass('open').removeClass('show').removeClass('match');
 
 }
+
 function win(){
   if (matchList.length === 16){
     clearInterval(timer);
@@ -212,3 +97,53 @@ function win(){
 
    ;}
 }
+
+function timer(){
+    var sec = 0;
+    function pad ( val ) { return val > 9 ? val : "0" + val; }
+        countDown = setInterval( function(){
+        document.getElementById("seconds").innerHTML=pad(++sec%60);
+        document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
+        if (matchList.length === 16){
+               clearInterval(countDown);
+         }
+       }, 1000);
+}
+
+$(document).ready(function() {
+//main
+   
+$(".restart").click(function() {
+clicked = false;
+reset();
+$(holder).addClass("fa fa-star");
+});
+
+$( "ul.deck li" ).one( "click", function() {
+  
+});
+    
+$("ul.deck li").click(function() {
+    if (!clicked){
+    timer();
+  }
+    moves1();
+    clicked=true;
+    document.getElementById("numberMoves").innerText++;
+    openList.push(this);
+    $(this).addClass("show open");
+    if(openList.length === 2)
+    {
+      setTimeout(ismatch,502);
+      setTimeout(win,700);
+    }
+});
+});
+
+//onload
+window.onload = function () {
+  listCards = shuffle(listCards);
+  shuffle_cards(listCards);
+  $(".card").removeClass("match").removeClass("open").removeClass("show");
+
+};
