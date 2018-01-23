@@ -178,7 +178,7 @@ matchList = [];
 document.getElementById("minutes").innerHTML='00'
 document.getElementById("seconds").innerHTML='00'
 clicked = false
-
+clearInterval(timer);
 }
 
 
