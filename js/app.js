@@ -45,7 +45,10 @@ function shuffle_cards(array)
  let matchList = [];
  let clicked=false;
 
-//finds a match
+
+
+
+ //finds a match
  function ismatch()
 {
     let class1 = $(openList[0]).children('i').attr('class');
@@ -88,12 +91,11 @@ function moves1(){
 
 
 
+
+
 $(document).ready(function() {
 
 //main
-var arr = $(".match").toArray();
-if (arr.length === 16){
-  alert("You Win in " + document.getElementById("numberMoves").innerText + " moves. With a star rating of " + $(".fa.fa-star").length + " in " + minutesLabel.innerHTML + " minutes and "+ secondsLabel.innerHTML + " seconds")}
 
 $(".restart").click(function() {
 reset();
@@ -113,14 +115,8 @@ $( "ul.deck li" ).one( "click", function() {
 
     });
 $("ul.deck li").click(function() {
+moves1();
 
-  $("ul.deck li").click(function() {
-  if (!$('.match').length%2===0||!$('.match').length===0 )
-  {
-
-    setTimeout(flip,400);
-  }
-  });
 clicked=true;
         document.getElementById("numberMoves").innerText++;
         openList.push(this);
@@ -130,7 +126,7 @@ clicked=true;
         {
 
           setTimeout(ismatch,502);
-
+          setTimeout(win,700);
 
         }
 
@@ -139,8 +135,8 @@ clicked=true;
 
 
     });
-        var arr = $(".match").toArray();
-        if (arr.length === 16){alert("You Win in " + document.getElementById("numberMoves").innerText + " moves. With a star rating of " + $(".fa.fa-star").length + " in " + minutesLabel.innerHTML + " minutes and "+ secondsLabel.innerHTML + " seconds")}
+
+
 
 
     });
@@ -153,12 +149,12 @@ clicked=true;
        let timer = setInterval( function(){
            document.getElementById("seconds").innerHTML=pad(++sec%60);
            document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
+           if (matchList.length === 16){
+               clearInterval(timer);
+
+         }
        }, 1000);
-       $(".restart").click(function() {
-
-        clearInterval(timer);
-
-       });
+       
 
      }
 
@@ -175,7 +171,7 @@ console.log("reset");
 $(holder).addClass("fa fa-star");
 listCards = shuffle(listCards);
 shuffle_cards(listCards);
-clearInterval(timer);
+
 document.getElementById("minutes").innerHTML='00'
 document.getElementById("seconds").innerHTML='00'
 clicked = false
@@ -195,12 +191,16 @@ window.onload = function () {
 //on restart
 
 $(".restart").click(function() {
+  clearInterval(timer);
 timer();
     reset();
 });
 
 function flip() {
   $('.card').removeClass('open').removeClass('show').removeClass('match');
-  alert ('clicked same card twice');
+
 }
-clicked = false
+function win(){
+  if (matchList.length === 16){
+     alert("You Win in " + document.getElementById("numberMoves").innerText + " moves. With a star rating of " + $(".fa.fa-star").length + " in " + document.getElementById("minutes").innerText + " minutes and "+  document.getElementById("seconds").innerText + " seconds")}
+}
