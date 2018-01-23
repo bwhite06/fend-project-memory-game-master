@@ -151,7 +151,6 @@ clicked=true;
            document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
            if (matchList.length === 16){
                clearInterval(timer);
-
          }
        }, 1000);
        $(".restart").click(function() {
@@ -175,7 +174,7 @@ console.log("reset");
 $(holder).addClass("fa fa-star");
 listCards = shuffle(listCards);
 shuffle_cards(listCards);
-
+matchList = [];
 document.getElementById("minutes").innerHTML='00'
 document.getElementById("seconds").innerHTML='00'
 clicked = false
@@ -207,5 +206,8 @@ function flip() {
 }
 function win(){
   if (matchList.length === 16){
-     alert("You Win in " + document.getElementById("numberMoves").innerText + " moves. With a star rating of " + $(".fa.fa-star").length + " in " + document.getElementById("minutes").innerText + " minutes and "+  document.getElementById("seconds").innerText + " seconds")}
+     alert("You Win in " + document.getElementById("numberMoves").innerText + " moves. With a star rating of " + $(".fa.fa-star").length + " in " + document.getElementById("minutes").innerText + " minutes and "+  document.getElementById("seconds").innerText + " seconds")
+     reset();
+
+   ;}
 }
