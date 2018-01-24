@@ -89,8 +89,9 @@ function flip() {
   if ($(".open").length===1){
      $('.card').removeClass('open').removeClass('show');
      openList = [];
+     setTimeout(matchList.pop(),1000);
+     document.getElementById("numberMoves").innerText--;
 
-     document.getElementById("numberMoves").innerText--
   }
 
 
@@ -117,6 +118,7 @@ function timer(){
        }, 1000);
 }
 
+
 $(document).ready(function() {
 //main
 
@@ -134,6 +136,14 @@ $( "ul.deck li" ).dblclick(function() {
 $("ul.deck li").click(function() {
     if (!clicked){
     timer();
+  }
+
+
+  if($(".open").length===1)
+  {
+     matchList.pop();
+     matchList.pop();
+
   }
     moves1();
     clicked=true;
