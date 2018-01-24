@@ -48,6 +48,7 @@ function shuffle_cards(array)
         $(openList[1]).removeClass("open show");
         matchList.push(openList[0]);
         matchList.push(openList[1]);
+
     }
 
     else {
@@ -85,7 +86,13 @@ function reset (){
 }
 
 function flip() {
-  $('.card').removeClass('open').removeClass('show').removeClass('match');
+  if ($(".open").length===1){
+     $('.card').removeClass('open').removeClass('show');
+     openList = [];
+
+     document.getElementById("numberMoves").innerText--
+  }
+
 
 }
 
@@ -112,31 +119,36 @@ function timer(){
 
 $(document).ready(function() {
 //main
-   
+
 $(".restart").click(function() {
 clicked = false;
 reset();
 $(holder).addClass("fa fa-star");
 });
 
-$( "ul.deck li" ).one( "click", function() {
-  
+$( "ul.deck li" ).dblclick(function() {
+
+
 });
-    
+
 $("ul.deck li").click(function() {
     if (!clicked){
     timer();
   }
     moves1();
     clicked=true;
-    document.getElementById("numberMoves").innerText++;
+
     openList.push(this);
     $(this).addClass("show open");
     if(openList.length === 2)
     {
-      setTimeout(ismatch,502);
-      setTimeout(win,700);
+      document.getElementById("numberMoves").innerText++;
+      setTimeout(flip, 402);
+      setTimeout(ismatch,700);
+      setTimeout(win,1000);
+
     }
+
 });
 });
 
