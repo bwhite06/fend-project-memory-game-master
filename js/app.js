@@ -61,7 +61,7 @@ function shuffle_cards(array)
     return;
 
 }
-//===Counts Performance===
+//    ===Counts Performance===
 function moves1(){
   if (document.getElementById("numberMoves").innerText ==16){
       $(holder[2]).removeClass("fa fa-star") ;
@@ -127,7 +127,7 @@ function remove (){
 }
 
 $(document).ready(function() {
-//Main Function
+//    ===Main Function===
 
 $(".restart").click(function() {
 clicked = false;
@@ -167,7 +167,7 @@ $("ul.deck li").click(function() {
 });
 });
 
-//onload
+//      ===Onload===
 window.onload = function () {
   listCards = shuffle(listCards);
   shuffle_cards(listCards);
