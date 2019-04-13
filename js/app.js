@@ -35,7 +35,8 @@ function shuffle_cards(array)
             curr = curr.getElementsByTagName("i")[0].setAttribute("class", array[i]);
         }
 }
-//finds a match
+//   ===Finds A Match===
+
  function ismatch()
 {
     let class1 = $(openList[0]).children('i').attr('class');
@@ -60,7 +61,7 @@ function shuffle_cards(array)
     return;
 
 }
-//counts performance
+//===Counts Performance===
 function moves1(){
   if (document.getElementById("numberMoves").innerText ==16){
       $(holder[2]).removeClass("fa fa-star") ;
@@ -126,7 +127,7 @@ function remove (){
 }
 
 $(document).ready(function() {
-//main
+//Main Function
 
 $(".restart").click(function() {
 clicked = false;
@@ -136,6 +137,8 @@ $(holder).addClass("fa fa-star");
 
 $( "ul.deck li" ).dblclick(function() {
 
+
+alert("Double Clicks Aren't Allowed");
 
 });
 
@@ -147,6 +150,7 @@ $("ul.deck li").click(function() {
 
 
     moves1();
+
     clicked=true;
 
     openList.push(this);
